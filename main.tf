@@ -1,6 +1,6 @@
 # create userdata content from template
 data "template_file" "create_userdata" {
-  template = "${file("${path.module}/userdata_template.d/userdata.tpl")}"
+  template = file("${path.module}/userdata_template.d/userdata.tpl")
 
   vars = {
     DISABLE_ROOT          = var.userdata_disable_root
