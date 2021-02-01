@@ -16,7 +16,7 @@ data "template_file" "create_userdata" {
 
 # create a local file
 resource "local_file" "userdata_from_template" {
-    content         = data.template_file.create_userdata.rendered
-    filename        = var.userdata_output_file_name
-    file_permission = "0644"
+  content         = data.template_file.create_userdata.rendered
+  filename        = var.userdata_output_file_name
+  file_permission = "0644"
 }
