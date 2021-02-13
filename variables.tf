@@ -6,6 +6,12 @@ variable "userdata_disable_root" {
   default     = "true"
 }
 
+variable "userdata_fix_slow_ssh_login" {
+  type        = string
+  description = "Fix the slow SSH login by disabling UseDNS, GSSAPIAuthentication and others of that kidney"
+  default     = "false"
+}
+
 variable "userdata_image_name" {
   type        = string
   description = "Name of the image used to create the instance(s)"

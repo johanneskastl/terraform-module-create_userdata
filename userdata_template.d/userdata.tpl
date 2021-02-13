@@ -1,4 +1,10 @@
 #cloud-config
+%{ if FIX_SLOW_SSH_LOGIN == "true" ~}
+
+# Enable cloud-init modules
+cloud_config_modules:
+  - runcmd
+%{ endif ~}
 
 # set the /etc/hosts
 manage_etc_hosts: ${MANAGE_ETC_HOSTS}
@@ -29,6 +35,15 @@ users:
     ssh_authorized_keys:
     - ${SSH_PUBKEY}
 %{ endif ~}
+%{ endif ~}
+%{ if FIX_SLOW_SSH_LOGIN == "true" ~}
+
+runcmd:
+    - sed -i '/UseDNS/s/^.*$/UseDNS no/' /etc/ssh/sshd_config
+    - sed -i '/ChallengeResponseAuthentication/s/^.*$/ChallengeResponseAuthentication no/' /etc/ssh/sshd_config
+    - sed -i '/KerberosAuthentication/s/^.*$/KerberosAuthentication no/' /etc/ssh/sshd_config
+    - sed -i '/GSSAPIAuthentication/s/^.*$/GSSAPIAuthentication no/' /etc/ssh/sshd_config
+    - systemctl restart sshd
 %{ endif ~}
 
 # eof
