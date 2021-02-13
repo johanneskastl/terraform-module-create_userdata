@@ -4,6 +4,7 @@ data "template_file" "create_userdata" {
 
   vars = {
     DISABLE_ROOT          = var.userdata_disable_root
+    FIX_SLOW_SSH_LOGIN    = var.userdata_fix_slow_ssh_login
     MANAGE_ETC_HOSTS      = var.userdata_manage_etc_hosts
     MANAGE_RESOLV_CONF    = var.userdata_manage_resolv_conf
     IMAGE_NAME            = var.userdata_image_name
